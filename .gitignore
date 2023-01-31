@@ -2,8 +2,9 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
+[Ll]ibrary/
 /[Tt]emp/
+[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
@@ -21,6 +22,11 @@
 
 # Visual Studio cache directory
 .vs/
+.idea/
+
+# Add by Billy
+/[Ll]ibrary/Artifacts
+*/[Ll]ibrary/Artifacts
 
 # Gradle cache directory
 .gradle/
@@ -58,3 +64,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.log
+*.cache
+*.dwlt
