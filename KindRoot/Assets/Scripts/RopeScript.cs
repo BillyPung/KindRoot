@@ -21,7 +21,8 @@ public class RopeScript : MonoBehaviour
     public bool done;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //I comment this to assign it in the inspector.
+        //player = GameObject.FindGameObjectWithTag("Player");
 
         lastNode = transform.gameObject;
 

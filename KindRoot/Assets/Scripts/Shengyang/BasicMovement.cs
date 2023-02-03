@@ -9,12 +9,19 @@ public class BasicMovement : MonoBehaviour
 
     public bool facingRight = true;
     public float strengthMulti = 1.7f;
+    
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+    public KeyCode upKey = KeyCode.W;
+    
     //public 
 
     private float jumpStrength = 0f;
     private float jumpDirection = 0f;
     
     private Rigidbody2D rb2d;
+    
 
     void Start()
     {
@@ -22,17 +29,17 @@ public class BasicMovement : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(jumpKey))
         {
             // Increase jump strength linearly within 5 seconds
             jumpStrength = Mathf.Clamp(jumpStrength + 2 * Time.deltaTime, 0f, 5f);
             print("Jump Strength: " + jumpStrength);
         }
         // Determine jump direction based on key input
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(leftKey))
         {
             
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(upKey))
             {
                 print("A + W");
                 jumpDirection = 15f;
@@ -43,9 +50,9 @@ public class BasicMovement : MonoBehaviour
                 jumpDirection = 45f;
             }
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(rightKey))
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(upKey))
             {
                 print("D + W");
                 jumpDirection = -15f;
@@ -56,7 +63,7 @@ public class BasicMovement : MonoBehaviour
                 jumpDirection = -45f;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(jumpKey))
         {
             
             // Get the jump vector based on direction and strength

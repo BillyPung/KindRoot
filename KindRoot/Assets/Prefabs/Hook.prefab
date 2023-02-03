@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7787066868876214948}
   - component: {fileID: 7787066868876214946}
   - component: {fileID: 3548901962065022178}
+  - component: {fileID: 5162059432154884803}
   - component: {fileID: 7787066868876214945}
   - component: {fileID: 7787066868876214944}
   m_Layer: 0
@@ -122,11 +123,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destiny: {x: 0, y: 0}
-  speed: 0.5
   distance: 1
   nodePrefab: {fileID: 2123845621119833855, guid: 97ce1dee35522554986b5c83248bbe29, type: 3}
   player: {fileID: 0}
   lastNode: {fileID: 0}
+  maxNodeNum: 0
+  curNodeNum: 0
+  done: 0
+--- !u!114 &5162059432154884803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7787066868876214949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8638ac0b4441157479e65bedb147c151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destiny: {x: 0, y: 0}
+  distance: 0
+  nodePrefab: {fileID: 0}
+  player: {fileID: 0}
+  lastNode: {fileID: 0}
+  maxNodeNum: 0
+  curNodeNum: 0
+  done: 0
 --- !u!58 &7787066868876214945
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -158,7 +181,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.5603414, y: 1.1445509}
+  m_ConnectedAnchor: {x: 1.51, y: -2.35}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
