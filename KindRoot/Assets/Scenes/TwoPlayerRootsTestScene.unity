@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 2043253189}
   - component: {fileID: 2043253188}
   - component: {fileID: 2043253192}
+  - component: {fileID: 2043253193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -441,7 +442,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043253187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f8d5de3a92592b489729a7f2c451237, type: 3}
   m_Name: 
@@ -466,6 +467,22 @@ MonoBehaviour:
   velocityX: 0
   isJumping: 0
   isOnGround: 0
+--- !u!114 &2043253193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043253187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d902853fe7706247bf0e57f7889314c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inAir: 0
+  inMoving: 0
+  facingRight: 1
+  strengthMulti: 5
 --- !u!1 &2142192997
 GameObject:
   m_ObjectHideFlags: 0

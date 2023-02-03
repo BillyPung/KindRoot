@@ -6,15 +6,68 @@ public class BasicMovement : MonoBehaviour
 {
     public bool inAir = false;
     public bool inMoving = false;
+
     public bool facingRight = true;
+    public float strengthMulti = 1.7f;
+    //public 
+
+    private float jumpStrength = 0f;
+    private float jumpDirection = 0f;
+    
+    private Rigidbody2D rb2d;
+
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // Increase jump strength linearly within 5 seconds
+            jumpStrength = Mathf.Clamp(jumpStrength + 2 * Time.deltaTime, 0f, 5f);
+            print("Jump Strength: " + jumpStrength);
+        }
+        // Determine jump direction based on key input
+        if (Input.GetKey(KeyCode.A))
+        {
+            
+            if (Input.GetKey(KeyCode.W))
+            {
+                print("A + W");
+                jumpDirection = 15f;
+            }
+            else
+            {
+                print("A");
+                jumpDirection = 45f;
+            }
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                print("D + W");
+                jumpDirection = -15f;
+            }
+            else
+            {
+                print("D");
+                jumpDirection = -45f;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            
+            // Get the jump vector based on direction and strength
+            Vector3 jumpVector = Quaternion.Euler(0, 0, jumpDirection) * Vector3.up * (strengthMulti * jumpStrength);
+
+            // Apply the jump force to the character's rigidbody
+            rb2d.AddForce(jumpVector, ForceMode2D.Impulse);
+            //rb2d.MovePosition();
+            // Reset jump strength and direction
+            jumpStrength = 0f;
+            jumpDirection = 0f;
+        }
     }
 }
