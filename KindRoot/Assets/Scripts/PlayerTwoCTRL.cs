@@ -32,6 +32,8 @@ public class PlayerTwoCTRL : MonoBehaviour
     // public float axisVal;
     public bool isJumping;
     public bool isOnGround;
+    
+    private AudioSource audioSource;
 
     
     // Start is called before the first frame update
@@ -43,6 +45,7 @@ public class PlayerTwoCTRL : MonoBehaviour
         // anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         col2D = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -121,6 +124,7 @@ public class PlayerTwoCTRL : MonoBehaviour
                 {
                     rig.velocity = new Vector2(rig.velocity.x, jumpingSpeed);
                     isJumping = true;
+                    audioSource.Play();
                     // anim.SetBool("Player-Jump", true);
                 }
 
