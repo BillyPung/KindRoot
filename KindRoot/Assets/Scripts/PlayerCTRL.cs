@@ -5,36 +5,35 @@ using UnityEngine;
 
 public class PlayerCTRL : MonoBehaviour
 {
-    [Header("移动")]
-    public float walkSpeed;
+    [Header("移动")] public float walkSpeed;
     public float accelerationTime;
     public float decelerationTime;
 
-    [Header("跳跃")]
-    public bool canJump = true;
+    [Header("跳跃")] public bool canJump = true;
     public float jumpingSpeed;
     public float fallMultiplier;
     public float lowJumpMultiplier;
 
-    [Header("判定是否在地上")]
-    public Vector2 pointOffset;
+    [Header("判定是否在地上")] public Vector2 pointOffset;
     public Vector2 size;
     public LayerMask groundLayerMask;
     public bool gravityModifier = true;
 
-    [Header("自身")] 
-    public NewRopeScript rootScript;
+    [Header("自身")] public NewRopeScript rootScript;
     public Rigidbody2D rig;
     public Animator anim;
     public SpriteRenderer sr;
     public BoxCollider2D col2D;
-    
+
     public float velocityX;
+
     // public float axisVal;
     public bool isJumping;
     public bool isOnGround;
-
     
+    private AudioSource audioSource;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +43,8 @@ public class PlayerCTRL : MonoBehaviour
         // anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         col2D = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class PlayerCTRL : MonoBehaviour
 
     private bool OnGround()
     {
-        Collider2D Coll= Physics2D.OverlapBox((Vector2)transform.position + pointOffset,size,0,groundLayerMask);
+        Collider2D Coll = Physics2D.OverlapBox((Vector2) transform.position + pointOffset, size, 0, groundLayerMask);
         if (Coll != null)
         {
             return true;
@@ -67,11 +68,13 @@ public class PlayerCTRL : MonoBehaviour
             return false;
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube((Vector2)transform.position + pointOffset,size);
+        Gizmos.DrawWireCube((Vector2) transform.position + pointOffset, size);
     }
+
     private void LeftRightMove()
     {
         MoveLogic(walkSpeed);
@@ -122,6 +125,7 @@ public class PlayerCTRL : MonoBehaviour
                 {
                     rig.velocity = new Vector2(rig.velocity.x, jumpingSpeed);
                     isJumping = true;
+                    audioSource.Play();
                     // anim.SetBool("Player-Jump", true);
                 }
 
@@ -152,12 +156,11 @@ public class PlayerCTRL : MonoBehaviour
                 //Rig.velocity = new Vector2(Rig.velocity.x, -JumpingSpeed);
             }
             else if (rig.velocity.y > 0
-            // else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1
+                     // else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1
                     ) //当玩家上升且没有按下跳跃键时
             {
                 rig.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) *
                                 Time.fixedDeltaTime; // (减速上升)
-
             }
         }
     }
@@ -170,4 +173,3 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 }
-
