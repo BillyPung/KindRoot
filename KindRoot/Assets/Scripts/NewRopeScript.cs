@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EdgeCollider2D))]
-
 public class NewRopeScript : MonoBehaviour
 {
-    
-
     public GameObject player;
 
     public float dist;
@@ -20,7 +17,9 @@ public class NewRopeScript : MonoBehaviour
     public float bigForce;
 
     public LineRenderer lr;
+
     public EdgeCollider2D ropeCol;
+
     // public int vertexCount;
     public GameObject[] nodes;
 
@@ -40,29 +39,32 @@ public class NewRopeScript : MonoBehaviour
         {
             // Debug.Log("第一个在的");
         }
-        
+
         else if (dist > (maxDist) && dist < (maxDist + stretchDis))
         {
-            Vector2 forceDir = (Vector2)transform.position - (Vector2)player.transform.position;
+            Vector2 forceDir = (Vector2) transform.position - (Vector2) player.transform.position;
             forceDir.Normalize();
             forceDir = forceDir * smallForce;
+            //It is commented by Billy, to have a linear force.
+            //forceDir = forceDir * (smallForce * (dist - maxDist) * 5);
             player.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            // Debug.Log("稍微超过了");
+            Debug.Log("稍微超过了");
+            print("force" + forceDir);
         }
-        
+
         else if (dist > (maxDist + stretchDis))
         {
-            Vector2 forceDir = (Vector2)transform.position - (Vector2)player.transform.position;
+            Vector2 forceDir = (Vector2) transform.position - (Vector2) player.transform.position;
             forceDir.Normalize();
-            forceDir = forceDir * bigForce;
+            //forceDir = forceDir * bigForce;
+            //It is commented by Billy, to have a linear force.
+            forceDir = forceDir * (bigForce * (dist - maxDist - stretchDis) * 5);
             player.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            // Debug.Log("超过很多了");
+            Debug.Log("超过很多了");
+            print("force" + forceDir);
         }
 
         RenderLine();
-
-
-
     }
 
 
@@ -74,6 +76,7 @@ public class NewRopeScript : MonoBehaviour
         {
             lr.SetPosition(i, nodes[i].transform.position);
         }
+
         SetEdgeCollider(lr);
     }
 
@@ -91,12 +94,12 @@ public class NewRopeScript : MonoBehaviour
         // ropeCol.offset
         // ropeCol.isTrigger = true;
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position,maxDist);
+        Gizmos.DrawWireSphere(transform.position, maxDist);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,maxDist + stretchDis);
+        Gizmos.DrawWireSphere(transform.position, maxDist + stretchDis);
     }
 }
