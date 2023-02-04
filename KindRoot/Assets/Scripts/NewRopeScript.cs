@@ -1,76 +1,102 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EdgeCollider2D))]
+
 public class NewRopeScript : MonoBehaviour
 {
+    
 
-    public GameObject player1;
-    public GameObject player2;
+    public GameObject player;
 
-    public float dist1;
-    public float dist2;
+    public float dist;
 
-    public float maxDist1;
-    public float maxDist2;
-
+    public float maxDist;
     public float stretchDis;
 
     public float smallForce;
     public float bigForce;
 
     public LineRenderer lr;
+    public EdgeCollider2D ropeCol;
     // public int vertexCount;
-    public GameObject[] nodes1;
+    public GameObject[] nodes;
+
     // Start is called before the first frame update
     void Start()
     {
+        ropeCol = GetComponent<EdgeCollider2D>();
         lr = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        dist1 = Vector2.Distance(transform.position, player1.transform.position);
+        dist = Vector2.Distance(transform.position, player.transform.position);
 
-        if (dist1 <= (maxDist1))
+        if (dist <= (maxDist))
         {
-            Debug.Log("第一个在的");
+            // Debug.Log("第一个在的");
         }
         
-        else if (dist1 > (maxDist1) && dist1 < (maxDist1 + stretchDis))
+        else if (dist > (maxDist) && dist < (maxDist + stretchDis))
         {
-            Vector2 forceDir = (Vector2)transform.position - (Vector2)player1.transform.position;
+            Vector2 forceDir = (Vector2)transform.position - (Vector2)player.transform.position;
             forceDir.Normalize();
             forceDir = forceDir * smallForce;
-            player1.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            Debug.Log("稍微超过了");
+            player.GetComponent<Rigidbody2D>().AddForce(forceDir);
+            // Debug.Log("稍微超过了");
         }
         
-        else if (dist1 > (maxDist1 + stretchDis))
+        else if (dist > (maxDist + stretchDis))
         {
-            Vector2 forceDir = (Vector2)transform.position - (Vector2)player1.transform.position;
+            Vector2 forceDir = (Vector2)transform.position - (Vector2)player.transform.position;
             forceDir.Normalize();
             forceDir = forceDir * bigForce;
-            player1.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            Debug.Log("超过很多了");
+            player.GetComponent<Rigidbody2D>().AddForce(forceDir);
+            // Debug.Log("超过很多了");
         }
 
         RenderLine();
-        
+
+
+
     }
 
 
     void RenderLine()
     {
-        lr.SetVertexCount(2);
-        // int i;
-        
-        // for (i = 0; i < nodes1.Length; i++)
-        // {
-        //     lr.SetPosition(i, nodes1[i].transform.position);
-        // }
-        lr.SetPosition(0, player1.transform.position);
-        lr.SetPosition(1, transform.position);
+        lr.positionCount = 2;
+
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            lr.SetPosition(i, nodes[i].transform.position);
+        }
+        SetEdgeCollider(lr);
+    }
+
+
+    void SetEdgeCollider(LineRenderer lineRenderer)
+    {
+        List<Vector2> edges = new List<Vector2>();
+        for (int point = 0; point < lineRenderer.positionCount; point++)
+        {
+            Vector3 lineRenderPoint = lineRenderer.GetPosition(point);
+            edges.Add(new Vector2(lineRenderPoint.x, lineRenderPoint.y));
+        }
+
+        ropeCol.SetPoints(edges);
+        // ropeCol.offset
+        // ropeCol.isTrigger = true;
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position,maxDist);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,maxDist + stretchDis);
     }
 }

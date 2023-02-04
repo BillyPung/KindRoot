@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCTRL : MonoBehaviour
+public class PlayerTwoCTRL : MonoBehaviour
 {
-    [Header("移动")]
+ [Header("移动")]
     public float walkSpeed;
     public float accelerationTime;
     public float decelerationTime;
@@ -21,8 +20,8 @@ public class PlayerCTRL : MonoBehaviour
     public Vector2 size;
     public LayerMask groundLayerMask;
     public bool gravityModifier = true;
-
-    [Header("自身")] 
+    
+    [Header("自身")]
     public NewRopeScript rootScript;
     public Rigidbody2D rig;
     public Animator anim;
@@ -79,7 +78,7 @@ public class PlayerCTRL : MonoBehaviour
 
     private void MoveLogic(float inputSpeed)
     {
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis("HorizontalTwo") > 0)
         {
             rig.velocity =
                 new Vector2(
@@ -88,7 +87,7 @@ public class PlayerCTRL : MonoBehaviour
             sr.flipX = false;
             // anim.SetBool("Player-CanWalk", true);
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (Input.GetAxis("HorizontalTwo") < 0)
         {
             rig.velocity =
                 new Vector2(
@@ -97,7 +96,7 @@ public class PlayerCTRL : MonoBehaviour
             sr.flipX = true;
             // anim.SetBool("Player-CanWalk", true);
         }
-        else if (Input.GetAxis("Horizontal") == 0)
+        else if (Input.GetAxis("HorizontalTwo") == 0)
         {
             rig.velocity = new Vector2(Mathf.SmoothDamp(rig.velocity.x, 0, ref velocityX, decelerationTime),
                 rig.velocity.y);
@@ -118,20 +117,20 @@ public class PlayerCTRL : MonoBehaviour
                     // anim.SetBool("Player-Jump", true);
                 }
 
-                if (Input.GetAxis("Jump") == 1 && isJumping == false)
+                if (Input.GetAxis("JumpTwo") == 1 && isJumping == false)
                 {
                     rig.velocity = new Vector2(rig.velocity.x, jumpingSpeed);
                     isJumping = true;
                     // anim.SetBool("Player-Jump", true);
                 }
 
-                else if (isOnGround && Input.GetAxis("Jump") == 1)
+                else if (isOnGround && Input.GetAxis("JumpTwo") == 1)
                 {
-                    // isJumping = false;
                     // anim.SetBool("Player-Jump", false);
+                    // isJumping = false;
                 }
 
-                else if (isOnGround && Input.GetAxis("Jump") == 0)
+                else if (isOnGround && Input.GetAxis("JumpTwo") == 0)
                 {
                     isJumping = false;
                     // anim.SetBool("Player-Jump", false);
@@ -152,22 +151,23 @@ public class PlayerCTRL : MonoBehaviour
                 //Rig.velocity = new Vector2(Rig.velocity.x, -JumpingSpeed);
             }
             else if (rig.velocity.y > 0
-            // else if (rig.velocity.y > 0 && Input.GetAxis("Jump") != 1
+            // else if (rig.velocity.y > 0 && Input.GetAxis("JumpTwo") != 1
                     ) //当玩家上升且没有按下跳跃键时
             {
                 rig.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) *
                                 Time.fixedDeltaTime; // (减速上升)
-
+            
             }
         }
     }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "Rope_2")
+        if (col.gameObject.name == "Rope_1")
         {
             col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
         }
     }
+    
+    
 }
-
