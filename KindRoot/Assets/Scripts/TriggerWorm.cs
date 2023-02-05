@@ -80,12 +80,12 @@ public class TriggerWorm : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (triggered)
-        {
+        // if (triggered)
+        // {
             if(col.gameObject.name == "Rope_1" || col.gameObject.name == "Rope_2")
             {
-                col.gameObject.GetComponent<NewRopeScript>().maxDist -= 1.5f;
+                col.gameObject.GetComponent<NewRopeScript>().maxDist -= 1f;
             }
-        }
+        // }
     }
 }

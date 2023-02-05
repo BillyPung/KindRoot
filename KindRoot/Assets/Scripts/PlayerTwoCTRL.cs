@@ -44,7 +44,7 @@ public class PlayerTwoCTRL : MonoBehaviour
         gameObject.tag = "Player";
         // groundLayerMask = LayerMask.GetMask("Ground");
         rig = GetComponent<Rigidbody2D>();
-        // anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         col2D = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
@@ -119,7 +119,7 @@ public class PlayerTwoCTRL : MonoBehaviour
                 {
                     isJumping = true;
                     // anim.SetBool("Player-CanWalk", false);
-                    // anim.SetBool("Player-Jump", true);
+                    anim.SetBool("Player-Jump", true);
                 }
 
                 if (Input.GetAxis("JumpTwo") == 1 && isJumping == false)
@@ -127,19 +127,19 @@ public class PlayerTwoCTRL : MonoBehaviour
                     rig.velocity = new Vector2(rig.velocity.x, jumpingSpeed);
                     isJumping = true;
                     audioSource.Play();
-                    // anim.SetBool("Player-Jump", true);
+                    anim.SetBool("Player-Jump", true);
                 }
 
                 else if (isOnGround && Input.GetAxis("JumpTwo") == 1)
                 {
-                    // anim.SetBool("Player-Jump", false);
+                    anim.SetBool("Player-Jump", false);
                     // isJumping = false;
                 }
 
                 else if (isOnGround && Input.GetAxis("JumpTwo") == 0)
                 {
                     isJumping = false;
-                    // anim.SetBool("Player-Jump", false);
+                    anim.SetBool("Player-Jump", false);
                 }
             }
         }
