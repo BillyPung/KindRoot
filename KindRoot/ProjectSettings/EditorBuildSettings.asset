@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestLevel2JumpVersion.unity
     guid: e011742da67d7524792882f08ed6a081
+  - enabled: 1
+    path: Assets/Scenes/ending.unity
+    guid: 74daba4b18fd9724ebc4152c2a124846
   m_configObjects: {}
