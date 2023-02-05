@@ -12,6 +12,8 @@ public class WormTrigger : MonoBehaviour
     private float _noTriggerTimer;
 
     public TriggerWorm tgw;
+    public Sprite normalSprite;
+    public Sprite triggeredSprite;
         
         // Start is called before the first frame update
     void Start()
@@ -45,7 +47,17 @@ public class WormTrigger : MonoBehaviour
             {
                 startCountDown = true;
                 tgw.triggered = true;
+                GetComponent<SpriteRenderer>().sprite = triggeredSprite;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Player_1" || other.gameObject.name == "Player_2")
+        {
+            GetComponent<SpriteRenderer>().sprite = normalSprite;
+            
         }
     }
 }
