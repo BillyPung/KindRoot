@@ -25,6 +25,8 @@ public class PlayerCTRL : MonoBehaviour
     public SpriteRenderer sr;
     public BoxCollider2D col2D;
 
+    public int knifeNum;
+    
     public float velocityX;
 
     // public float axisVal;
@@ -165,11 +167,15 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "Rope_2")
+        if (knifeNum > 0)
         {
-            col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
+            if (col.gameObject.name == "Rope_2")
+            {
+                col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
+                knifeNum -= 1;
+            }
         }
-    }*/
+    }
 }

@@ -20,9 +20,14 @@ public class KnifeItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player")
+        if (col.name == "Player_1")
         {
-            col.GetComponent<KnifeEffect>().gainKnifeItem();
+            col.GetComponent<PlayerCTRL>().knifeNum += 1;
+            Destroy(gameObject);
+        }
+        else if(col.name == "Player_2")
+        {
+            col.GetComponent<PlayerTwoCTRL>().knifeNum += 1;
             Destroy(gameObject);
         }
     }

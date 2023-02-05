@@ -28,6 +28,8 @@ public class PlayerTwoCTRL : MonoBehaviour
     public SpriteRenderer sr;
     public BoxCollider2D col2D;
     
+    public int knifeNum;
+    
     public float velocityX;
     // public float axisVal;
     public bool isJumping;
@@ -165,13 +167,16 @@ public class PlayerTwoCTRL : MonoBehaviour
         }
     }
     
-    /*private void OnTriggerEnter2D(Collider2D col)
+    
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "Rope_1")
+        if (knifeNum > 0)
         {
-            col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
+            if (col.gameObject.name == "Rope_1")
+            {
+                col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
+                knifeNum -= 1;
+            }
         }
-    }*/
-    
-    
+    }
 }
