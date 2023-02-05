@@ -165,11 +165,11 @@ public class PlayerCTRL : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    /*private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name == "Rope_2")
         {
             col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
         }
-    }
+    }*/
 }
