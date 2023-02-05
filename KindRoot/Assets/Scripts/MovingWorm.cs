@@ -17,6 +17,9 @@ public class MovingWorm : MonoBehaviour
     public bool flip = false;
     private float timer = 0f;
     public float flipTime = 0.5f;
+    
+    private float biteTimer = 0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -43,20 +46,26 @@ public class MovingWorm : MonoBehaviour
         }
         sp.flipX = flip;
         rig.velocity = new Vector2(speed, 0);
+        biteTimer += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if(biteTimer < 1f) return;
         if (col.gameObject.name == "Player_1")
         {
+            
             audioSource.clip = biteSound;
             audioSource.Play();
             col.gameObject.GetComponent<PlayerCTRL>().rootScript.maxDist -= 0.5f;
+            biteTimer = 0f;
         }
         else if (col.gameObject.name == "Player_2")
         {
+            audioSource.clip = biteSound;
             audioSource.Play();
             col.gameObject.GetComponent<PlayerTwoCTRL>().rootScript.maxDist -= 0.5f;
+            biteTimer = 0f;
         }
     }
 }
