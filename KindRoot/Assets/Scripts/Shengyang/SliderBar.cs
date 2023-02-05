@@ -15,12 +15,13 @@ public class SliderBar : MonoBehaviour
     private Image _imageCurrentLen;
     private float _currentLenRatio;
     private float _ropeMaxLenRatio;
-    private float _ropeTargetLen;
+    public float _ropeTargetLen;
 
     void Start()
     {
         _imageCurrentLen = currentLen.GetComponent<Image>();
         _imageRopeMaxLen = RopeMaxLen.GetComponent<Image>();
+        
     }
 
     void Update()
