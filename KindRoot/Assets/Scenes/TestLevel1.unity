@@ -2610,7 +2610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &302292576
 Transform:
   m_ObjectHideFlags: 0
@@ -2880,7 +2880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &321279046
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8771,6 +8771,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6198694744791258647, guid: ed4678afddddc5a4da589c92f2ae6200, type: 3}
   m_PrefabInstance: {fileID: 1206368147}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1234680675 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1905995068, guid: e06c7de78d5689343bac4e55bedca4cc, type: 3}
+  m_PrefabInstance: {fileID: 1401801188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1244423149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10005,6 +10010,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1905995068, guid: e06c7de78d5689343bac4e55bedca4cc, type: 3}
+      propertyPath: orthographic size
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3707259729800988067, guid: e06c7de78d5689343bac4e55bedca4cc, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -11051,8 +11060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53298112b05f604394153b5092ca349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera1: {fileID: 321279047}
-  camera2: {fileID: 302292578}
+  camera1: {fileID: 1234680675}
+  camera2: {fileID: 1619182319}
 --- !u!4 &1562501459
 Transform:
   m_ObjectHideFlags: 0
@@ -11253,6 +11262,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6198694744791258647, guid: ed4678afddddc5a4da589c92f2ae6200, type: 3}
   m_PrefabInstance: {fileID: 1611327507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1619182319 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1764327443, guid: c5dd7cf51ef1a564c96efd934bfcca7d, type: 3}
+  m_PrefabInstance: {fileID: 1939595816}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1627618837 stripped
 Transform:
@@ -12923,6 +12937,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1764327443, guid: c5dd7cf51ef1a564c96efd934bfcca7d, type: 3}
+      propertyPath: orthographic size
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4107838989158372880, guid: c5dd7cf51ef1a564c96efd934bfcca7d, type: 3}
       propertyPath: m_RootOrder
       value: 6
