@@ -65,9 +65,6 @@ public class BasicMovement : MonoBehaviour
         }
         if (Input.GetKeyUp(jumpKey))
         {
-            
-            ;
-            
             // Get the jump vector based on direction and strength
             Vector3 jumpVector = Quaternion.Euler(0, 0, jumpDirection) * Vector3.up * (strengthMulti * jumpStrength);
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTwoCTRL : MonoBehaviour
 {
@@ -37,6 +38,29 @@ public class PlayerTwoCTRL : MonoBehaviour
     
     private AudioSource audioSource;
 
+    [Header("跳一跳版本")]
+    
+    public bool inAir = false;
+    public bool inMoving = false;
+
+    public bool facingRight = true;
+    public float strengthMulti = 1.7f;
+
+    
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+    public KeyCode upKey = KeyCode.W;
+
+    public float jumpStrength = 0f;
+    public float jumpDirection = 0f;
+
+    public float maxJumpStren;
+    public float jumpStrengthAddSpd;
+
+    public GameObject[] dirArrows;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -51,14 +75,124 @@ public class PlayerTwoCTRL : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         isOnGround = OnGround();
-        LeftRightMove();
-        Jump();
-        GravityAdjustment();
+        if (isOnGround)
+        {
+            anim.SetBool("Player-Jump", false);
+        }
+        // LeftRightMove();
+        // Jump();
+        // GravityAdjustment();
+        Jumpjump();
     }
 
+        void Jumpjump()
+    {
+        if (Input.GetKey(jumpKey))
+        {
+            // Increase jump strength linearly within 5 seconds
+            // jumpStrength = Mathf.Clamp(jumpStrength + 3f * Time.deltaTime, 0f, 3.5f);
+            print("Jump Strength: " + jumpStrength);
+
+            jumpStrength += jumpStrengthAddSpd * Time.deltaTime;
+            if (jumpStrength > maxJumpStren || jumpStrength < 0f)
+            {
+                jumpStrengthAddSpd *= -1;
+            }
+            
+        }
+        // Determine jump direction based on key input
+        if (Input.GetKey(leftKey))
+        {
+            sr.flipX = true;
+            if (Input.GetKey(upKey))
+            {
+                // print("A + W");
+                for (int i = 0; i < dirArrows.Length; i++)
+                {
+                    dirArrows[i].GetComponent<Image>().enabled = false;
+                }
+                dirArrows[1].GetComponent<Image>().enabled = true;
+                jumpDirection = 15f;
+            }
+            else
+            {
+                // print("A");
+                for (int i = 0; i < dirArrows.Length; i++)
+                {
+                    dirArrows[i].GetComponent<Image>().enabled = false;
+                }
+                dirArrows[0].GetComponent<Image>().enabled = true;
+                jumpDirection = 45f;
+            }
+        }
+        else if (Input.GetKey(rightKey))
+        {
+            sr.flipX = false;
+            if (Input.GetKey(upKey))
+            {
+                for (int i = 0; i < dirArrows.Length; i++)
+                {
+                    dirArrows[i].GetComponent<Image>().enabled = false;
+                }
+                dirArrows[3].GetComponent<Image>().enabled = true;
+                // print("D + W");
+                jumpDirection = -15f;
+            }
+            else
+            {
+                for (int i = 0; i < dirArrows.Length; i++)
+                {
+                    dirArrows[i].GetComponent<Image>().enabled = false;
+                }
+                dirArrows[4].GetComponent<Image>().enabled = true;
+                // print("D");
+                jumpDirection = -45f;
+            }
+        }
+        else if(Input.GetKey(upKey) && !Input.GetKey(leftKey) && !Input.GetKey(rightKey))
+        {
+            for (int i = 0; i < dirArrows.Length; i++)
+            {
+                dirArrows[i].GetComponent<Image>().enabled = false;
+            }
+            dirArrows[2].GetComponent<Image>().enabled = true;
+            // print("W");
+            jumpDirection = 0f;
+        }
+        else
+        {
+            for (int i = 0; i < dirArrows.Length; i++)
+            {
+                dirArrows[i].GetComponent<Image>().enabled = false;
+            }
+        }
+        
+        if (Input.GetKeyUp(jumpKey))
+        {
+            // Get the jump vector based on direction and strength
+            Vector3 jumpVector = Quaternion.Euler(0, 0, jumpDirection) * Vector3.up * (strengthMulti * jumpStrength);
+
+            audioSource.Play();
+            anim.SetBool("Player-Jump", true);
+            // Apply the jump force to the character's rigidbody
+            rig.AddForce(jumpVector, ForceMode2D.Impulse);
+            //rb2d.MovePosition();
+            // Reset jump strength and direction
+            jumpStrength = 0f;
+            jumpDirection = 0f;
+
+            for (int i = 0; i < dirArrows.Length; i++)
+            {
+                dirArrows[i].GetComponent<Image>().enabled = false;
+            }
+        }
+    }
+    
+    
+    
     private bool OnGround()
     {
         Collider2D Coll= Physics2D.OverlapBox((Vector2)transform.position + pointOffset,size,0,groundLayerMask);

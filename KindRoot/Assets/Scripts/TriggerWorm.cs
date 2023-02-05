@@ -16,7 +16,7 @@ public class TriggerWorm : MonoBehaviour
     public float speed = 100f;
     public float moveTime;
     private float _moveTimer;
-    
+    public float acceleration;
     public float initialMoveTime;
     private float _initialMoveTimer;
     
@@ -59,7 +59,7 @@ public class TriggerWorm : MonoBehaviour
             {
                 _moveTimer -= Time.deltaTime;
                 rig.velocity = Vector2.right * Time.deltaTime * speed;
-                speed += 3000f * Time.deltaTime;
+                speed += acceleration * Time.deltaTime;
             }
             else if(_moveTimer < 0)
             {
