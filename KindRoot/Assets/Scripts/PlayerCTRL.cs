@@ -35,8 +35,9 @@ public class PlayerCTRL : MonoBehaviour
     public bool isOnGround;
     
     private AudioSource audioSource;
-    
-    [Header("跳一跳版本")]
+
+    [Header("跳一跳版本")] 
+    public bool canMove = true;
     
     public bool inAir = false;
     public bool inMoving = false;
@@ -57,6 +58,9 @@ public class PlayerCTRL : MonoBehaviour
     public float jumpStrengthAddSpd;
 
     public GameObject[] dirArrows;
+
+    public AudioClip jumpAudio;
+    public AudioClip cutOtherAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -82,13 +86,17 @@ public class PlayerCTRL : MonoBehaviour
         // LeftRightMove();
         // Jump();
         // GravityAdjustment();
-        Jumpjump();
+        if (canMove)
+        {
+            Jumpjump();
+        }
     }
 
     void Jumpjump()
     {
         if (Input.GetKey(jumpKey))
         {
+            audioSource.clip = jumpAudio;
             // Increase jump strength linearly within 5 seconds
             // jumpStrength = Mathf.Clamp(jumpStrength + 3f * Time.deltaTime, 0f, 3.5f);
             print("Jump Strength: " + jumpStrength);
@@ -312,6 +320,8 @@ public class PlayerCTRL : MonoBehaviour
         {
             if (col.gameObject.name == "Rope_2")
             {
+                audioSource.clip = cutOtherAudio;
+                audioSource.Play();
                 col.gameObject.GetComponent<NewRopeScript>().maxDist -= 0.5f;
                 knifeNum -= 1;
             }

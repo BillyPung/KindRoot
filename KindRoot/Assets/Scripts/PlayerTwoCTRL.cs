@@ -38,8 +38,8 @@ public class PlayerTwoCTRL : MonoBehaviour
     
     private AudioSource audioSource;
 
-    [Header("跳一跳版本")]
-    
+    [Header("跳一跳版本")] 
+    public bool canMove = true;
     public bool inAir = false;
     public bool inMoving = false;
 
@@ -85,7 +85,10 @@ public class PlayerTwoCTRL : MonoBehaviour
         // LeftRightMove();
         // Jump();
         // GravityAdjustment();
-        Jumpjump();
+        if (canMove)
+        {
+            Jumpjump();
+        }
     }
 
         void Jumpjump()

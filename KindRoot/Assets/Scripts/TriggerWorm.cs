@@ -20,6 +20,9 @@ public class TriggerWorm : MonoBehaviour
     public float initialMoveTime;
     private float _initialMoveTimer;
     
+    private AudioSource audioSource;
+    public AudioClip biteSound;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class TriggerWorm : MonoBehaviour
         anim = GetComponent<Animator>();
         _moveTimer = moveTime;
         _initialMoveTimer = initialMoveTime;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -94,6 +98,8 @@ public class TriggerWorm : MonoBehaviour
     {
         if(col.gameObject.name == "Rope_1" || col.gameObject.name == "Rope_2")
         {
+            audioSource.clip = biteSound;
+            audioSource.Play();
             col.gameObject.GetComponent<NewRopeScript>().maxDist -= 1f;
         }
     }
