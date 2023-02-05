@@ -21,7 +21,7 @@ public class MovingWorm : MonoBehaviour
     void Update()
     {
 
-        if (transform.position.x > rightBound.transform.position.x - 0.2f || transform.position.x < leftBound.transform.position.x + 0.2f)
+        if (transform.position.x > rightBound.transform.position.x || transform.position.x < leftBound.transform.position.x)
         {
             speed *= -1;
         }

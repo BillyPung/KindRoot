@@ -48,8 +48,8 @@ public class NewRopeScript : MonoBehaviour
             //It is commented by Billy, to have a linear force.
             //forceDir = forceDir * (smallForce * (dist - maxDist) * 5);
             player.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            Debug.Log("稍微超过了");
-            print("force" + forceDir);
+            // Debug.Log("稍微超过了");
+            // print("force" + forceDir);
         }
 
         else if (dist > (maxDist + stretchDis))
@@ -60,8 +60,8 @@ public class NewRopeScript : MonoBehaviour
             //It is commented by Billy, to have a linear force.
             forceDir = forceDir * (bigForce * (dist - maxDist - stretchDis) * 5);
             player.GetComponent<Rigidbody2D>().AddForce(forceDir);
-            Debug.Log("超过很多了");
-            print("force" + forceDir);
+            // Debug.Log("超过很多了");
+            // print("force" + forceDir);
         }
 
         RenderLine();

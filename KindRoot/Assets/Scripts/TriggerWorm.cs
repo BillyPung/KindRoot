@@ -11,6 +11,7 @@ public class TriggerWorm : MonoBehaviour
     public float beforeFlyTime;
     public Vector2 startPos;
     public Rigidbody2D rig;
+    public Animator anim;
     
     public float speed = 100f;
     public float moveTime;
@@ -24,6 +25,7 @@ public class TriggerWorm : MonoBehaviour
     {
         startPos = (Vector2)transform.position;
         rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         _moveTimer = moveTime;
         _initialMoveTimer = initialMoveTime;
     }
@@ -61,6 +63,7 @@ public class TriggerWorm : MonoBehaviour
             }
             else if(_moveTimer < 0)
             {
+                anim.SetBool("TriggeredMove", false);
                 _moveTimer = moveTime;
                 canMove = false;
                 rig.velocity = Vector2.zero;
@@ -73,19 +76,25 @@ public class TriggerWorm : MonoBehaviour
 
     IEnumerator Fly()
     {
+        StartCoroutine(TriggerAnimation());
         yield return new WaitForSeconds(beforeFlyTime);
         canMove = true;
         triggered = false;
+        // anim.SetBool("TriggeredMove", true);
     }
+    
+    IEnumerator TriggerAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("TriggeredMove", true);
+    }
+    
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        // if (triggered)
-        // {
-            if(col.gameObject.name == "Rope_1" || col.gameObject.name == "Rope_2")
-            {
-                col.gameObject.GetComponent<NewRopeScript>().maxDist -= 1f;
-            }
-        // }
+        if(col.gameObject.name == "Rope_1" || col.gameObject.name == "Rope_2")
+        {
+            col.gameObject.GetComponent<NewRopeScript>().maxDist -= 1f;
+        }
     }
 }
