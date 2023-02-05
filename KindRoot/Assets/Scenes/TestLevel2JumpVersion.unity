@@ -1114,6 +1114,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1905995068}
+    - target: {fileID: 1764327443, guid: c5dd7cf51ef1a564c96efd934bfcca7d, type: 3}
+      propertyPath: orthographic size
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4107838989158372880, guid: c5dd7cf51ef1a564c96efd934bfcca7d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7603,6 +7607,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1905995068, guid: e06c7de78d5689343bac4e55bedca4cc, type: 3}
+      propertyPath: orthographic size
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3707259729800988067, guid: e06c7de78d5689343bac4e55bedca4cc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -10978,9 +10986,21 @@ PrefabInstance:
       propertyPath: speed
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 7552801370946726684, guid: 7bfb5e12b06266b47913bb0d1600e259, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552801370946726687, guid: 7bfb5e12b06266b47913bb0d1600e259, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7552801370946726687, guid: 7bfb5e12b06266b47913bb0d1600e259, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552801370946726687, guid: 7bfb5e12b06266b47913bb0d1600e259, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7552801371572312023, guid: 7bfb5e12b06266b47913bb0d1600e259, type: 3}
       propertyPath: m_LocalPosition.x
