@@ -11,7 +11,7 @@ public class IntroJump : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            SceneManager.LoadScene("TestLevel1");
+            SceneManager.LoadScene("Level1");
         }
     }
 }
